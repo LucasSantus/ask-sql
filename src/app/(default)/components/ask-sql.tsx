@@ -1,7 +1,9 @@
 "use client";
 
+import { Framing } from "@/components/framing";
 import { initialSchema } from "@/constants/globals";
-
+import { Header } from "@/layout/header";
+import { bounceAnimationHorizontalDislocate } from "@/utils/animation/bounceAnimationHorizontalDislocate";
 import { useCompletion } from "ai/react";
 import { Stars } from "lucide-react";
 import { highlight, languages } from "prismjs";
@@ -33,58 +35,79 @@ export function AskSql({}: AskSqlProps) {
 
   return (
     <div>
-      <div className="flex justify-between">
+      <Framing
+        {...bounceAnimationHorizontalDislocate({ delay: 0.3 })}
+        className="flex justify-between"
+      >
         <Header
           setInput={setInput}
           setCompletion={setCompletion}
           setSchema={setSchema}
         />
-      </div>
+      </Framing>
 
       <form
         className="flex w-full flex-col py-8 text-custom-foam"
         onSubmit={handleSubmit}
       >
-        <label className="text-lg font-light" htmlFor="schema">
-          Cole seu código sql aqui:
-        </label>
+        <Framing {...bounceAnimationHorizontalDislocate({ delay: 0.5 })}>
+          <label className="text-lg font-light" htmlFor="schema">
+            Cole seu código sql aqui:
+          </label>
+        </Framing>
 
-        <Editor
-          textareaId="schema"
-          value={schema}
-          onValueChange={(code) => setSchema(code)}
-          highlight={(code) => highlight(code, languages.sql, "sql")}
-          className="my-4 rounded-md border border-custom-blue-berry-300 bg-custom-blue-berry-600 font-mono focus-within:ring-2 focus-within:ring-custom-lime-500"
-          padding={16}
-          textareaClassName="outline-none"
-        />
+        <Framing {...bounceAnimationHorizontalDislocate({ delay: 0.7 })}>
+          <Editor
+            textareaId="schema"
+            value={schema}
+            onValueChange={(code) => setSchema(code)}
+            highlight={(code) => highlight(code, languages.sql, "sql")}
+            className="my-4 rounded-md border border-custom-blue-berry-300 bg-custom-blue-berry-600 font-mono focus-within:ring-2 focus-within:ring-custom-lime-500"
+            padding={16}
+            textareaClassName="outline-none"
+          />
+        </Framing>
 
-        <label className="text-lg font-light" htmlFor="question">
-          Faça uma pergunta sobre o código:
-        </label>
+        <Framing {...bounceAnimationHorizontalDislocate({ delay: 0.9 })}>
+          <label className="text-lg font-light" htmlFor="question">
+            Faça uma pergunta sobre o código:
+          </label>
+        </Framing>
 
-        <textarea
-          className="my-4 rounded-md border border-custom-blue-berry-300 bg-custom-blue-berry-600 px-4 py-3 outline-none focus:ring-2 focus:ring-custom-lime-500"
-          name="question"
-          id="question"
-          value={input}
-          onChange={handleInputChange}
-        />
+        <Framing {...bounceAnimationHorizontalDislocate({ delay: 1.1 })}>
+          <textarea
+            className="my-4 h-full w-full rounded-md border border-custom-blue-berry-300 bg-custom-blue-berry-600 px-4 py-3 outline-none focus:ring-2 focus:ring-custom-lime-500"
+            name="question"
+            id="question"
+            value={input}
+            onChange={handleInputChange}
+          />
+        </Framing>
 
-        <button
-          type="submit"
-          className="flex h-14 items-center justify-center gap-2 rounded-lg border border-custom-pistachio text-custom-pistachio"
-        >
-          <Stars />
-          Perguntar á inteligência artificial
-        </button>
+        <Framing {...bounceAnimationHorizontalDislocate({ delay: 1.3 })}>
+          <button
+            type="submit"
+            className="flex h-14 w-full items-center justify-center gap-2 rounded-lg border border-custom-pistachio text-custom-pistachio hover:opacity-50"
+          >
+            <Stars />
+            Perguntar á inteligência artificial
+          </button>
+        </Framing>
       </form>
 
-      <div className="mt-6 text-white">
+      <Framing
+        {...bounceAnimationHorizontalDislocate({ delay: 1.5 })}
+        className="mt-6 text-white"
+      >
         <label className="text-foam text-lg font-light" htmlFor="question">
           Resposta:
         </label>
+      </Framing>
 
+      <Framing
+        {...bounceAnimationHorizontalDislocate({ delay: 1.7 })}
+        className="mt-6 text-white"
+      >
         <Editor
           textareaId="schema"
           readOnly
@@ -95,7 +118,7 @@ export function AskSql({}: AskSqlProps) {
           padding={16}
           textareaClassName="outline-none"
         />
-      </div>
+      </Framing>
     </div>
   );
 }
