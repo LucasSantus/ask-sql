@@ -1,19 +1,19 @@
 "use client";
 
-import { useSchema } from "@/hooks/useSchema";
-import { Header } from "@/layout/Header";
+import { initialSchema } from "@/constants/globals";
+
 import { useCompletion } from "ai/react";
 import { Stars } from "lucide-react";
 import { highlight, languages } from "prismjs";
 import "prismjs/components/prism-sql";
 import "prismjs/themes/prism-dark.css";
-import { Fragment } from "react";
+import { useState } from "react";
 import Editor from "react-simple-code-editor";
 
 interface AskSqlProps {}
 
 export function AskSql({}: AskSqlProps) {
-  const { schema, setSchema } = useSchema();
+  const [schema, setSchema] = useState(initialSchema);
 
   const {
     handleSubmit,
@@ -32,8 +32,14 @@ export function AskSql({}: AskSqlProps) {
   const result = completion;
 
   return (
-    <Fragment>
-      <Header setInput={setInput} setCompletion={setCompletion} />
+    <div>
+      <div className="flex justify-between">
+        <Header
+          setInput={setInput}
+          setCompletion={setCompletion}
+          setSchema={setSchema}
+        />
+      </div>
 
       <form
         className="flex w-full flex-col py-8 text-custom-foam"
@@ -90,6 +96,6 @@ export function AskSql({}: AskSqlProps) {
           textareaClassName="outline-none"
         />
       </div>
-    </Fragment>
+    </div>
   );
 }

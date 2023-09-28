@@ -1,8 +1,8 @@
-import { ClientProviders } from "@/contexts/ClientProviders";
 import { cn } from "@/utils/cn";
 import type { Metadata } from "next";
 import { Inter, Ubuntu_Mono } from "next/font/google";
 import "./globals.css";
+import { NoScript } from "./no-script";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -25,7 +25,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn(inter.variable, ubuntuMono.variable)}>
       <body className="bg-custom-blue-berry-900">
-        <ClientProviders>{children}</ClientProviders>
+        <NoScript />
+        {children}
       </body>
     </html>
   );
