@@ -1,4 +1,4 @@
-import { AskSql } from "@/components/AskSql";
+import { AskSql } from "./components/ask-sql";
 
 export default function Home() {
   return (
