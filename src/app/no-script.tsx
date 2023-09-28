@@ -18,7 +18,7 @@ export const NoScript: FC<NoScriptProps> = () => (
         }
       `}
     </style>
-    <div className="flex h-screen w-full items-center justify-center bg-slate-900 text-2xl text-white">
+    <div className="flex h-screen w-full items-center justify-center bg-custom-blue-berry-900 text-2xl text-white">
       Ative o JavaScript para o sistema funcionar corretamente.
     </div>
   </noscript>

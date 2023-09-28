@@ -1,7 +1,8 @@
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter, Ubuntu_Mono } from "next/font/google";
-import "./globals.css";
+import "./../assets/css/globals.css";
+import "./../assets/css/reset.css";
 import { NoScript } from "./no-script";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });

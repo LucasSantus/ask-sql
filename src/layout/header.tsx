@@ -3,7 +3,7 @@
 import { initialSchema } from "@/constants/globals";
 import { Trash } from "lucide-react";
 import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, Fragment, SetStateAction } from "react";
 import logo from "./../assets/logo.svg";
 
 interface HeaderProps {
@@ -14,7 +14,7 @@ interface HeaderProps {
 
 export function Header({ setInput, setCompletion, setSchema }: HeaderProps) {
   return (
-    <>
+    <Fragment>
       <div>
         <Image
           src={logo}
@@ -36,6 +36,6 @@ export function Header({ setInput, setCompletion, setSchema }: HeaderProps) {
           />
         </button>
       </div>
-    </>
+    </Fragment>
   );
 }
