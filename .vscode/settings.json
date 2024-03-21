@@ -9,7 +9,7 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.parameterHints.enabled": true,
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true
+    "source.organizeImports": "explicit"
   },
 
   // prettier
@@ -24,18 +24,4 @@
   "prettier.jsxSingleQuote": false,
   "prettier.bracketSameLine": false,
   "prettier.endOfLine": "auto",
-
-  // javascript
-  "javascript.suggest.autoImports": true,
-  "javascript.updateImportsOnFileMove.enabled": "always",
-
-  // others
-  "breadcrumbs.enabled": true,
-  "typescript.suggest.autoImports": true,
-  "emmet.syntaxProfiles": {
-    "javascript": "jsx"
-  },
-  "emmet.includeLanguages": {
-    "javascript": "javascriptreact"
-  }
 }
