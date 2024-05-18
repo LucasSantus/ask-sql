@@ -5,7 +5,7 @@ import { initialSchema } from "@/constants/globals";
 import { Header } from "@/layout/header";
 import { bounceAnimationHorizontalDislocate } from "@/utils/animation/bounceAnimationHorizontalDislocate";
 import { useCompletion } from "ai/react";
-import { Stars } from "lucide-react";
+import { Loader2Icon, StarsIcon } from "lucide-react";
 import { highlight, languages } from "prismjs";
 import "prismjs/components/prism-sql";
 import "prismjs/themes/prism-dark.css";
@@ -21,6 +21,7 @@ export function AskSql({}: AskSqlProps) {
     handleSubmit,
     completion,
     input,
+    isLoading,
     handleInputChange,
     setInput,
     setCompletion,
@@ -88,8 +89,13 @@ export function AskSql({}: AskSqlProps) {
           <button
             type="submit"
             className="flex h-14 w-full items-center justify-center gap-2 rounded-lg border border-custom-pistachio text-custom-pistachio hover:opacity-50"
+            disabled={isLoading}
           >
-            <Stars />
+            {isLoading ? (
+              <Loader2Icon className="animate-spin" />
+            ) : (
+              <StarsIcon />
+            )}
             Perguntar á inteligência artificial
           </button>
         </Framing>

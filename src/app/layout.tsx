@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Inter, Ubuntu_Mono } from "next/font/google";
 import "./../assets/css/globals.css";
@@ -27,6 +28,7 @@ export default function RootLayout({
     <html lang="en" className={cn(inter.variable, ubuntuMono.variable)}>
       <body className="bg-custom-blue-berry-900">
         <NoScript />
+        <SpeedInsights />
         {children}
       </body>
     </html>
