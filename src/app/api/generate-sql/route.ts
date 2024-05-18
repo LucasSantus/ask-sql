@@ -1,45 +1,57 @@
-import { OpenAIStream, StreamingTextResponse } from "ai";
-import OpenAI from "openai";
+import {
+  defaultSafetySettings,
+  mapSafetySettings,
+} from "@/constants/safety-settings-mapper";
+import { gemini } from "@/lib/gemini";
+import { sqlFormSchema } from "@/validation/sql";
+import { GoogleGenerativeAIStream, StreamingTextResponse } from "ai";
 
 export const runtime = "edge";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+export async function POST(request: Request) {
+  const parseResult = sqlFormSchema.safeParse(await request.json());
 
-export async function POST(req: Request) {
-  const { schema, prompt } = await req.json();
+  if (!parseResult.success) {
+    return new Response(JSON.stringify({ error: "Invalid request data" }), {
+      status: 400,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
+  const { schema, prompt } = parseResult.data;
 
   const message = `
-    O seu trabalho é criar queries em SQL a partir de um schema SQL abaixo.
+    O seu trabalho é criar queries em SQL a partir do schema SQL disponibilizado abaixo.
 
     Schema SQL: 
 
-    """
     ${schema}
-    """
 
-    A partir do schema acima, escreva uma query SQL a partir da solicitação abaixo:
+    A partir do schema disponibilizado, escreva uma query SQL apartir da solicitação abaixo:
 
     Solicitação:
 
-    Me retorne somente o código SQL, nada além disso.
-
     ${prompt}
+
+    Observação, É extremamente importante que retorne somente a resposta em sql sem caracteres especiais, nada além disso.
   `;
 
-  const response = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
-    stream: true,
-    messages: [
-      {
-        role: "user",
-        content: message,
-      },
-    ],
-  });
+  const mappedSafetySettings = mapSafetySettings(defaultSafetySettings);
 
-  const stream = OpenAIStream(response);
+  const geminiStream = await gemini
+    .getGenerativeModel({
+      model: "gemini-pro",
+      safetySettings: mappedSafetySettings,
+      generationConfig: {
+        maxOutputTokens: 2000,
+        temperature: 0.7,
+      },
+    })
+    .generateContentStream([message]);
+
+  const stream = GoogleGenerativeAIStream(geminiStream);
 
   return new StreamingTextResponse(stream);
 }

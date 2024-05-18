@@ -7,6 +7,8 @@
 The idea is:
 _"Create a simple project related to generating SQL queries from natural language. With the aim of building the application to enhance learning in NextJS, React, TypeScript and TailwindCSS."_
 
+Project developed by me participating in #boraCodar32 created by <a href="https://www.rocketseat.com.br/boracodar">RockeatSeat</a>.
+
 ---
 
 <h3 id="status">:heavy_exclamation_mark: Status</h3>
@@ -14,16 +16,6 @@ _"Create a simple project related to generating SQL queries from natural languag
 <h4 align="center">
  ✔️ Finished project ✔️
 </h4>
-
----
-
-<h3 id="why">:question: Why</h3>
-
-This project is part of my personal portfolio, I will be happy if you provide some feedback, code, structure, functionality or any feature&improvement you can report to improve it.
-
-You can use this project however you want, whether it's for studying, making improvements, you call the shots!
-
-This is a totally free project!
 
 ---
 
